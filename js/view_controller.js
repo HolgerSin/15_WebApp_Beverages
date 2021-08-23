@@ -2,7 +2,7 @@
 /* View- Controller */
 
 /* Der Plan
-    Einlesen Daten von Webseite :: toDo
+    Einlesen Daten von Webseite :: check!
 	Check Daten :: toDo
     Btn. Trigger :: toDo
     Business-Logic (Alter --> Getränk) :: check!
@@ -10,23 +10,43 @@
 */
 
 // Modul Ablaufsteuerung | Test:
-// controller()
+// controller();
 function controller() {
     ausgabe(updateImg(checkAge(getInput())));
 }
 
 
-// Trigger - Btn 
-
+// Trigger - BtnClick 
+const btn = document.getElementById("trigBtn");
+btn.addEventListener("click",actOnClick)
 
 // Trigger - Input
-
+const field  = document.getElementsByName("eingabe")[0];
+field.addEventListener("input",isInputValid);
 
 // Event-Dispatcher
-
+function actOnClick() {
+    if (isInputValid()) {
+        controller();
+    } else {
+        ausgabe("Input nicht korrekt!")
+    }
+}
 
 // Modul: Check auf korrekte Eingaben ...
+function isInputValid() {
 
+    let inputStr = field.value;
+    let patt = "1";  // 0 - 999
+    let cond = (inputStr == patt);
+   
+    if (!cond) {  // Fehlerbehandlung
+        field.value = "";
+        updateImg(data.default.bev);
+    }
+
+    return false;
+}
 
 // Modul: Eingabe | Test:
 // ausgabe(getInput());

@@ -3,8 +3,8 @@
 
 /* Der Plan
     Einlesen Daten von Webseite :: check!
-	Check Daten :: toDo
-    Btn. Trigger :: toDo
+	Check Daten :: check!
+    Btn. Trigger :: check!
     Business-Logic (Alter --> Getränk) :: check!
     Bild austauschen :: check!
 */
@@ -14,7 +14,6 @@
 function controller() {
     ausgabe(updateImg(checkAge(getInput())));
 }
-
 
 // Trigger - BtnClick 
 const btn = document.getElementById("trigBtn");
@@ -37,23 +36,21 @@ function actOnClick() {
 function isInputValid() {
 
     let inputStr = field.value;
-    let patt = "1";  // 0 - 999
-    let cond = (inputStr == patt);
+    let patt = /^[0-9]{1,3}$/g;   // 0 - 999
+    let cond = patt.test(inputStr);
    
     if (!cond) {  // Fehlerbehandlung
         field.value = "";
         updateImg(data.default.bev);
     }
 
-    return false;
+    return cond;
 }
 
 // Modul: Eingabe | Test:
 // ausgabe(getInput());
 function getInput() {
-    const inputField  = document.getElementsByName("eingabe")[0];
-    let age = parseInt(inputField.value);
-    return age;
+    return parseInt(field.value);
 }
 
 //Modul: Business-Logic (Mapping) | Test:
